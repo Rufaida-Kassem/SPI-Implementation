@@ -1,5 +1,6 @@
 module Master(clk, reset,start, slaveSelect, masterDataToSend, masterDataReceived, SCLK, CS, MOSI, MISO);
 
+//Rules to remember 
 //input must be wire  --> lnside the module 
 //input can be sedt any type ---> outside the module
 //output can be anything iside the module 
@@ -83,6 +84,6 @@ end
 end
 endmodule
 
-//we can use count 
+// we can use count 
 // same data transmitted is recieved
-//if we read a bit from right, we recieve it in the right.
+// if we read a bit from right, we recieve it in the right.
