@@ -1,4 +1,6 @@
 //the following code is a testbench for the master and slave modules
+//it is used to test the functionality of the modules
+
 module DevelopmentTB();
 
 reg clk; // Clock which is sent from the testbench to the master.
@@ -46,6 +48,7 @@ localparam TESTCASECOUNT = 2;
 wire [7:0] testcase_masterData [1:TESTCASECOUNT];
 wire [7:0] testcase_slaveData  [1:TESTCASECOUNT][0:2];
 
+// Here we define the test cases
 assign testcase_masterData[1] = 8'b01010011;
 assign testcase_slaveData[1][0] = 8'b00001001;
 assign testcase_slaveData[1][1] = 8'b00100010;
@@ -105,7 +108,7 @@ initial begin
 	if(failures) $display("FAILURE: %d out of %d testcases have failed", failures, 3*2*TESTCASECOUNT);
 	else $display("SUCCESS: All %d testcases have been passed successfully", 3*2*TESTCASECOUNT);
 end
-
+// The clock signal
 // Toggle the clock every half period
 always #(PERIOD/2) clk = ~clk;
-endmodule 
+endmodule
