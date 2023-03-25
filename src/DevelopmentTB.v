@@ -69,6 +69,15 @@ initial begin
 	start = 0;
 	masterDataToSend = 0;
 	for(slaveSelect = 0; slaveSelect < 3; slaveSelect=slaveSelect+1) slaveDataToSend[slaveSelect] = 0;
+	// Reset Done is done so set reset back to 0 after 1 clock cycle
+	#PERIOD reset = 0;
+	// Loop over all test cases
+	for(index = 1; index <= TESTCASECOUNT; index=index+1) begin
+		$display("Running test set %d", index);
+		// Loop over slaves and give them the data they should send to the master
+		for(slaveSelect = 0; slaveSelect < 3; slaveSelect=slaveSelect+1) 
+			slaveDataToSend[slaveSelect] = testcase_slaveData[index][slaveSelect];
+		
 	end
 
 // Toggle the clock every half period
