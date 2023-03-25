@@ -1,3 +1,4 @@
+//the following code is a testbench for the master and slave modules
 module DevelopmentTB();
 
 reg clk; // Clock which is sent from the testbench to the master.
