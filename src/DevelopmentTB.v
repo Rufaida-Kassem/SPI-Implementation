@@ -77,7 +77,23 @@ initial begin
 		// Loop over slaves and give them the data they should send to the master
 		for(slaveSelect = 0; slaveSelect < 3; slaveSelect=slaveSelect+1) 
 			slaveDataToSend[slaveSelect] = testcase_slaveData[index][slaveSelect];
-		
+		// Set the data that the master should send
+		masterDataToSend = testcase_masterData[index];
+		// Loop over slaves and initiate transmission with each one of them
+		for(slaveSelect = 0; slaveSelect < 3; slaveSelect=slaveSelect+1) begin
+			start = 1; // Set start to 1 to initiate transmission
+			#PERIOD start = 0; // Wait for 1 period then set start back to 0
+			// Wait for 20 periods to make sure that the transmission is done
+			// NOTE: 8 periods should be enough but I am leaving room for other design choices (such as making the SCLK slower than the clk).
+			#(PERIOD*20);
+			// Check that the master correctly received the data that should have been sent by the slave
+			if(masterDataReceived == slaveDataToSend[slaveSelect]) $display("From Slave %d to Master: Success", slaveSelect);
+			else begin
+				$display("From Slave %d to Master: Failure (Expected: %b, Received: %b)", slaveSelect, slaveDataToSend[slaveSelect], masterDataReceived);
+				failures = failures + 1;
+			end
+			
+		end
 	end
 
 // Toggle the clock every half period
