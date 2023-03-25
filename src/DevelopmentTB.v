@@ -100,6 +100,9 @@ initial begin
 			end
 		end
 	end
+	// Display a SUCCESS or a FAILURE message based on the test outcome
+	if(failures) $display("FAILURE: %d out of %d testcases have failed", failures, 3*2*TESTCASECOUNT);
+	else $display("SUCCESS: All %d testcases have been successfu", 3*2*TESTCASECOUNT);
 end
 
 // Toggle the clock every half period
