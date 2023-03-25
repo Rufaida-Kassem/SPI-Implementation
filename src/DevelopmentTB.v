@@ -100,6 +100,7 @@ initial begin
 			end
 		end
 	end
+end
 
 // Toggle the clock every half period
 always #(PERIOD/2) clk = ~clk;
