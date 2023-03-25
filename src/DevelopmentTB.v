@@ -58,4 +58,19 @@ assign testcase_slaveData[2][2] = 8'b11000010;
 // index will be used for looping over test cases
 // failures will store the number of failed test cases
 integer index, failures;
-endmodule
+
+initial begin
+	// Initialinzing the variables
+	index = 0;
+	failures = 0;
+	// Initializing the inputs and reseting the units under test
+	clk = 0; // Initialize the clock signal
+    reset = 1; // Set reset to 1 in order to reset all the modules
+	start = 0;
+	masterDataToSend = 0;
+	for(slaveSelect = 0; slaveSelect < 3; slaveSelect=slaveSelect+1) slaveDataToSend[slaveSelect] = 0;
+	end
+
+// Toggle the clock every half period
+always #(PERIOD/2) clk = ~clk;
+endmodule 
