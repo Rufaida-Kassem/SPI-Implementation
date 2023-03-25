@@ -92,7 +92,12 @@ initial begin
 				$display("From Slave %d to Master: Failure (Expected: %b, Received: %b)", slaveSelect, slaveDataToSend[slaveSelect], masterDataReceived);
 				failures = failures + 1;
 			end
-			
+			// Check that the slave correctly received the data that should have been sent by the master
+			if(slaveDataReceived[slaveSelect] == masterDataToSend) $display("From Master to Slave %d: Success", slaveSelect);
+			else begin
+				$display("From Master to Slave %d: Failure (Expected: %b, Received: %b)", slaveSelect, masterDataToSend, slaveDataReceived[slaveSelect]);
+				failures = failures + 1;
+			end
 		end
 	end
 
