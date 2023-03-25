@@ -1,9 +1,9 @@
+// the testbench for the master module
 module Master_TB();
-
 reg clk; 
-reg reset; 
-reg start; 
-reg [1:0] slaveSelect;
+reg reset;
+reg start; // This signals the master to start the transmission (also the master will read "masterDataToSend" in order to send it to the slave).
+reg [1:0] slaveSelect; // This tells the master which slave to transmit to. It should be read by the master when "start" becomes high.
 reg [7:0] masterDataToSend;
 wire [7:0] masterDataReceived;
 wire SCLK; wire [0:2] CS;wire MOSI;
@@ -28,7 +28,7 @@ integer failures, index;
 
 initial begin
 	// Initialinzing the variables
-	
+
 	failures = 0;
 	// Initializing the inputs and reseting the units under test
 	clk = 0; // Initialize the clock signal
@@ -38,7 +38,7 @@ initial begin
 	masterDataToSend = 0;
 	// Reset Done is done so set reset back to 0 after 1 clock cycle
 	#PERIOD reset = 0;
-		
+		// Run the test cases
 		for(index = 1; index <= TESTCASECOUNT; index=index+1) begin
 			$display("Running test set %d", index);
 			masterDataToSend = testcase_masterData[index - 1]; // Set the data that the master should send
