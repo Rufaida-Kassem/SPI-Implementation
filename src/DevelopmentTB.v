@@ -58,3 +58,4 @@ assign testcase_slaveData[2][2] = 8'b11000010;
 // index will be used for looping over test cases
 // failures will store the number of failed test cases
 integer index, failures;
+endmodule
